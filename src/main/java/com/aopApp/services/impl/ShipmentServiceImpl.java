@@ -3,6 +3,7 @@ package com.aopApp.services.impl;
 import com.aopApp.services.ShipmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Slf4j
@@ -27,17 +28,17 @@ public class ShipmentServiceImpl implements ShipmentService {
     }
 
     @Override
+    @Transactional
     public String trackPackage(Long orderId) {
-//        log.info("trackPackage is called");
-        try{
-            log.info("Tracking  the order...");
+        try {
+            log.info("Tracking the order...");
             Thread.sleep(300);
-            throw  new RuntimeException("Exception occurred during trackPackage");
 
-        }
-        catch (InterruptedException e) {
-            throw  new RuntimeException(e);
+            throw new RuntimeException("Exception occurred during trackPackage");
 
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
         }
     }
 }
