@@ -2,12 +2,15 @@ package com.aopApp.services.impl;
 
 import com.aopApp.services.ShipmentService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
 
 @Slf4j
+@Service
 public class ShipmentServiceImpl implements ShipmentService {
     @Override
     public String orderPackage(Long orderId) {
-        log.info("orderPackage is called");
+//        log.info("orderPackage is called");
        try{
            log.info("Processing the order...");
            Thread.sleep(1000);
@@ -25,7 +28,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 
     @Override
     public String trackPackage(Long orderId) {
-        log.info("trackPackage is called");
+//        log.info("trackPackage is called");
         try{
             log.info("Tracking  the order...");
             Thread.sleep(300);
