@@ -11,9 +11,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAspect {
 
-    @Before("execution(* com.aopApp.services.impl.ShipmentServiceImpl.*(..))")
-    public void beforeShipmentServiceMethod(JoinPoint joinPoint) {
-
-        log.info("Before method call : {}", joinPoint.getSignature());
-    }
+   //types of advice: execution pointcut
+//    @Before("execution(* com.aopApp.services.impl.ShipmentServiceImpl.*(..))")
+    //action
+//   @Before("execution(* orderPackage(..))")
+//   @Before("execution(* com.aopApp.services.impl.*.orderPackage(..))")
+   @Before("execution(* com.aopApp.services.impl.*.*(..))")
+   public void beforeShipmentServiceMethod(JoinPoint joinPoint) {
+       log.info("Before method call, kind: {}", joinPoint.getKind());
+       log.info("Before method call, signature : {}", joinPoint.getSignature());
+   }
 }
