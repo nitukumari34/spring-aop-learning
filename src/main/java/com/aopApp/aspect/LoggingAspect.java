@@ -21,4 +21,14 @@ public class LoggingAspect {
        log.info("Before method call, kind: {}", joinPoint.getKind());
        log.info("Before method call, signature : {}", joinPoint.getSignature());
    }
+//    @Before("execution(* com.aopApp.services.impl.*.*(..))")
+@Before("execution(* com.aopApp..*)")
+    public void beforeServiceMethodCalls() {
+        log.info("Service Impl calls");
+    }
+
+    @Before("@annotation(org.springframework.transaction.annotation.Transactional)")
+    public void beforeTransactionalAnnotationCalls() {
+        log.info("Before transactional annotation method calls");
+    }
 }
