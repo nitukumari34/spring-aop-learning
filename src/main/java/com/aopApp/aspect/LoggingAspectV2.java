@@ -2,10 +2,11 @@ package com.aopApp.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
-//@Aspect
+@Aspect
 @Component
 @Slf4j
 public class LoggingAspectV2 {
@@ -27,6 +28,18 @@ public class LoggingAspectV2 {
     public void afterServiceMethodCalls(JoinPoint joinPoint, Exception ex) {
         log.info("After throwing advice method called: {}", joinPoint.getSignature());
         log.info("Exception: {}", ex.getMessage());
+    }
+
+    @Around("allServiceMethodPointCut()")
+    public  Object logExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+
+        Long startTime=System.currentTimeMillis();
+       Object returnedValue= proceedingJoinPoint.proceed();
+        Long endTime=System.currentTimeMillis();
+        proceedingJoinPoint.proceed();
+        Long diff=endTime-startTime;
+        log.info("Time taken for {}  is {}",proceedingJoinPoint.getSignature(),diff);
+        return  returnedValue;
     }
     @Pointcut("execution(* com.aopApp.services.impl.*.*(..))")
     public  void allServiceMethodPointCut(){
