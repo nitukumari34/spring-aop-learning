@@ -16,10 +16,17 @@ public class LoggingAspectV2 {
     }
 
 //    @After("allServiceMethodPointCut()")
-@AfterReturning(value = "allServiceMethodPointCut()",returning = "returnedObj")
+//@AfterReturning(value = "allServiceMethodPointCut()",returning = "returnedObj")
+
     public  void afterServiceMethodCalls(JoinPoint joinPoint,Object returnedObj){
         log.info("After returning advice method calls ,{}",joinPoint.getSignature());
     log.info("After returning returned value   ,{}",returnedObj);
+    }
+
+    @AfterThrowing(value = "allServiceMethodPointCut()", throwing = "ex")
+    public void afterServiceMethodCalls(JoinPoint joinPoint, Exception ex) {
+        log.info("After throwing advice method called: {}", joinPoint.getSignature());
+        log.info("Exception: {}", ex.getMessage());
     }
     @Pointcut("execution(* com.aopApp.services.impl.*.*(..))")
     public  void allServiceMethodPointCut(){
