@@ -54,7 +54,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Aspect
+//@Aspect
 @Component
 public class LoggingAspect {
 
