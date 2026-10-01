@@ -15,7 +15,8 @@ public class ShipmentServiceImplTest {
     private  ShipmentServiceImpl shipmentService;
     @Test
     void aopTestOrderPackage(){
-        shipmentService.orderPackage(4L);
+      String orderString=  shipmentService.orderPackage(4L);
+      log.info(orderString);
     }
     @Test
     void aopTestTrackPackage() {
